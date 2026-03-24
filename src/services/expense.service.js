@@ -14,8 +14,8 @@ export const insertExpense = async (expenseDetails) => {
     }
 }
 
-export const fetchUserExpenses = async (username) => {
-    const userExpenses = await expenseModel.find({ username });
+export const fetchUserExpenses = async (userId) => {
+    const userExpenses = await expenseModel.find({ userId });
     return {
         success: true,
         message: "Fetched Expenses Successfully.",

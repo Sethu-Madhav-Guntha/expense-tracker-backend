@@ -21,14 +21,13 @@ export const createUser = async (userDetails) => {
             message: "User Can't be Created."
         }
     }
-    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET_KEY);
     const user = {
         userId: newUser._id,
         username: newUser.username,
         email: newUser.email,
         role: newUser.role
     }
-    // console.log(user);
     return {
         user,
         token,
@@ -43,8 +42,7 @@ export const checkCredentials = async (credentials) => {
     if (userInfo) {
         const isPasswordMatched = bcryptjs.compare(password, userInfo.password);
         if (isPasswordMatched) {
-            // console.log(userInfo);
-            const token = jwt.sign({ userId: userInfo._id }, process.env.JWT_SECRET);
+            const token = jwt.sign({ userId: userInfo._id }, process.env.JWT_SECRET_KEY);
             const user = {
                 userId: userInfo._id,
                 username: userInfo.username,
@@ -52,7 +50,8 @@ export const checkCredentials = async (credentials) => {
                 role: userInfo.role
             }
             return {
-                user: userInfo,
+                user,
+                token,
                 message: "User Logged In Successfully.",
                 success: true
             }

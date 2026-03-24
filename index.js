@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import userRouter from "./src/routes/user.route.js";
 import expenseRouter from "./src/routes/expense.route.js";
 import connectDB from "./src/config/db.js";
+import { fetchUserDetails, isUserAuthenticated } from "./src/middleware/auth.middleware.js";
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -14,7 +15,7 @@ app.use(cors());
 connectDB();
 
 app.use("/users", userRouter);
-app.use("/expenses", expenseRouter);
+app.use("/expenses", [isUserAuthenticated, fetchUserDetails], expenseRouter);
 
 app.listen(PORT, () => {
     console.log(`App is listening at Port: ${PORT}`);

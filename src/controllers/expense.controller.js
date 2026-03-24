@@ -1,10 +1,9 @@
 import { insertExpense, fetchUserExpenses, updateExpenseDetails, removeExpense } from "../services/expense.service.js";
 
 export const addExpense = async (req, res) => {
-    const { username } = req.headers;
-    // console.log(req.body);
+    const { userId } = req;
     const { item, amount } = req.body;
-    const newExpense = await insertExpense({ item, amount, username });
+    const newExpense = await insertExpense({ item, amount, userId });
     if (!newExpense.success) {
         return res.status(409).json({ ...newExpense });
     }
@@ -12,17 +11,16 @@ export const addExpense = async (req, res) => {
 };
 
 export const getUserExpenses = async (req, res) => {
-    const { username } = req.headers;
-    const expenses = await fetchUserExpenses(username);
+    const { userId } = req;
+    const expenses = await fetchUserExpenses(userId);
     res.status(200).json({ ...expenses });
 };
 
 export const updateExpense = async (req, res) => {
-    const { username } = req.headers;
-    const { id } = req.params;
-    console.log(id);
-    const updateExpenseObject = { ...req.body, username };
-    const updatedExpense = await updateExpenseDetails(id, updateExpenseObject);
+    const { userId } = req;
+    const { expenseId } = req.params;
+    const updateExpenseObject = { ...req.body, userId };
+    const updatedExpense = await updateExpenseDetails(expenseId, updateExpenseObject);
     if (!updatedExpense.success) {
         return res.status(401).json({ ...updatedExpense });
     }
@@ -30,7 +28,7 @@ export const updateExpense = async (req, res) => {
 };
 
 export const deleteExpense = async (req, res) => {
-    const { id } = req.params;
-    const deletedExpense = await removeExpense(id);
+    const { expenseId } = req.params;
+    const deletedExpense = await removeExpense(expenseId);
     return res.status(204).json({ ...deletedExpense });
 };
