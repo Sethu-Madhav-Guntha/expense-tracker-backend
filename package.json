@@ -1,0 +1,28 @@
+{
+  "name": "expense-tracker-backend",
+  "version": "1.0.0",
+  "description": "Backend for Tracking the Expenses of the User.",
+  "homepage": "https://github.com/Sethu-Madhav-Guntha/expense-tracker-backend#readme",
+  "bugs": {
+    "url": "https://github.com/Sethu-Madhav-Guntha/expense-tracker-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sethu-Madhav-Guntha/expense-tracker-backend.git"
+  },
+  "license": "ISC",
+  "author": "Sethu Madhav Guntha",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.3.1"
+  }
+}
